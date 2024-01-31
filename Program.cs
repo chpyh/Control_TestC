@@ -4,8 +4,20 @@
 лучше обойтись исключительно массивами.
 */
 // Далее универсальное решение для любого текста, введенного с консоли.
+void FillStrArray(string text, string[] str)
+{
+    for (int i = 0; i < str.Length; i++)
+    {
+        str[i] = string.Empty;
+        str[i] = str[i] + text[i];
+    }
+}
+
 Console.Clear();
 Console.WriteLine("Введите строку: ");
 string text = Console.ReadLine()! + " ";
 //Вариант создания массива из слов 1. 
 string[] words = Console.ReadLine()!.Split(new char[] { ' ' }); //это готовая функция. 
+//Вариант создания массива из слов 2 - без использования коллекций:
+string[] str = new string[text.Length]; // Сначала преобразуем строку в массив срок, чтобы можно было сравнивать значения. 
+FillStrArray(text, str); // заполняем массив строк
