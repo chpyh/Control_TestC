@@ -40,14 +40,44 @@ void ArrNoExtraSpaces(string[] words, string[] str)
         }
     }
 }
+int CountOfShortStrings(string[] words)
+{
+    int count = 0;
+    foreach (string s in words)
+    {
+        if (s.Length < 4)
+        {
+            count++;
+        }
+    }
+    return count;
+}
+
+void LessThanFourChars (string[] words, string[] shortStrings)
+{
+    int i = 0;
+    foreach (string s in words)
+    {
+        if (s.Length < 4 && i < shortStrings.Length)
+        {
+            shortStrings[i] = s;
+            i++;
+        }
+    }
+
+Console.WriteLine($"Массив из строк длинной не больше трех символов: \n[{string.Join(" ", shortStrings)}]");
+}
 
 Console.Clear();
 Console.WriteLine("Введите строку: ");
 string text = Console.ReadLine()! + " ";
 //Вариант создания массива из слов 1. 
-string[] words = Console.ReadLine()!.Split(new char[] { ' ' }); //это готовая функция. 
+//string[] words = Console.ReadLine()!.Split(new char[] { ' ' }); //это готовая функция. 
 //Вариант создания массива из слов 2 - без использования коллекций:
 string[] str = new string[text.Length]; // Сначала преобразуем строку в массив срок, чтобы можно было сравнивать значения. 
 FillStrArray(text, str); // заполняем массив строк
 string[] words = new string[CountOFWords(str, text)];   // Затем создаем массив без лишних пробелов.
 ArrNoExtraSpaces(words, str);   // Заполняем массив, очищенный от пробелов.
+//Далее общая часть для Варианта 1 и Варианта 2.
+string[] shortStrings = new string[CountOfShortStrings(words)];//Рассчитываем размер массива из строк длинной не более трех символов 
+LessThanFourChars(words, shortStrings);//Заполянем массив из строк длинной не более трех символов.
