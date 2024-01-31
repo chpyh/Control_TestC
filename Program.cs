@@ -12,6 +12,34 @@ void FillStrArray(string text, string[] str)
         str[i] = str[i] + text[i];
     }
 }
+int CountOFWords(string[] str, string text)
+{
+    int count = 0;
+    for (int i = 0; i < str.Length - 1; i++)
+    {
+        if (str[i] != " " && str[i + 1] == " ")
+            count++;
+    }
+    return count;
+}
+
+void ArrNoExtraSpaces(string[] words, string[] str)
+{
+    string result = string.Empty;
+    int index = 0;
+    for (int i = 0; i < str.Length; i++)
+        if (index < words.Length)
+        {
+            if(str[i] != " ") result = result + str[i];
+        
+            else if(i != 0 && str[i -1] != " ")
+        {
+            words[index] = result;
+            result = string.Empty;
+            index++;
+        }
+    }
+}
 
 Console.Clear();
 Console.WriteLine("Введите строку: ");
@@ -21,3 +49,5 @@ string[] words = Console.ReadLine()!.Split(new char[] { ' ' }); //это гот�
 //Вариант создания массива из слов 2 - без использования коллекций:
 string[] str = new string[text.Length]; // Сначала преобразуем строку в массив срок, чтобы можно было сравнивать значения. 
 FillStrArray(text, str); // заполняем массив строк
+string[] words = new string[CountOFWords(str, text)];   // Затем создаем массив без лишних пробелов.
+ArrNoExtraSpaces(words, str);   // Заполняем массив, очищенный от пробелов.
